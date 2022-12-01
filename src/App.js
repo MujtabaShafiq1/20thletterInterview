@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from "react-redux"
+import { Grid, Container, Typography } from "@mui/material";
+
+import Card from "./components/Card";
+import AddCard from "./components/AddCard";
 
 function App() {
+
+  const cardList = useSelector(state => state.card.cards)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth='lg' align='center'>
+      <Typography sx={{ textAlign: "left", fontSize: "18px" }}>Muhammad Mujtaba Shafiq</Typography>
+      <Grid container justifyContent="center" spacing={2} >
+        {cardList.map(card => {
+          return (
+            <Grid item xs={12} sm={6} md={4} key={card.id}>
+              <Card properties={card} key={card.primaryColor} />
+            </Grid>
+          )
+        })}
+        <Grid item>
+          <AddCard />
+        </Grid>
+      </Grid>
+
+    </Container>
+
   );
 }
 
